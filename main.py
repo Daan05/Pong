@@ -2,7 +2,7 @@ import pygame, sys
 from ball import *
 from thingie import *
 
-pygame.init()
+pygame.font.init()
 
 FPS = 60
 
@@ -17,12 +17,23 @@ ball = Ball(400, 250, 10)
 left_thing = Thing(0, 190)
 right_thing = Thing(780, 190)
 
+font1 = pygame.font.SysFont('freesanbold.ttf', 50)
+
 def main():
      quit = False
 
      score_1 = 0
      score_2 = 0
-     
+
+     # Text stuff
+     text1 = font1.render(str(0), True, WHITE)
+     textRect1 = text1.get_rect()
+     textRect1.center = (60, 60)
+
+     text2 = font1.render(str(0), True, WHITE)
+     textRect2 = text1.get_rect()
+     textRect2.center = (width - 60, 60)
+
      clock = pygame.time.Clock()
 
      left_rect = pygame.Rect(left_thing.x, left_thing.y, left_thing.width, left_thing.height)
@@ -58,6 +69,9 @@ def main():
           pygame.draw.circle(screen, WHITE, (ball.x, ball.y), ball.radius)
           pygame.draw.rect(screen, WHITE, left_rect)
           pygame.draw.rect(screen, WHITE, right_rect)
+
+          screen.blit(text1, textRect1)
+          screen.blit(text2, textRect2)
      
           ball.x += ball.vel_x
           ball.y += ball.vel_y
@@ -72,25 +86,25 @@ def main():
                #player1
                ball.x = 400
                ball.y= 250
-               score_1 +=1
-               print(score_1)
+               score_1 += 1
+               text2 = font1.render(str(score_1), True, WHITE)
 
           if check_point(ball, width) == 2:
                #player2
                ball.x = 400
                ball.y= 250
-               score_2 +=1
-               print(score_2)
+               score_2 += 1
+               text1 = font1.render(str(score_2), True, WHITE)
 
 
      return
 
 def check_collision_x(ball, left, right, width):
      # Check collision left
-     if ball.x < left.width and ball.y > left.y and ball.y < left.y+left.height:
+     if ball.x < left.width and ball.y > left.y and ball.y < left.y + left.height:
           return True
      # Check collision right
-     if ball.x > width-right.width and ball.y > right.y and ball.y < right.y+right.height:
+     if ball.x > width-right.width and ball.y > right.y and ball.y < right.y + right.height:
           return True
      return False
 
@@ -99,17 +113,17 @@ def check_collision_y(ball, height):
      if ball.y < ball.radius:
           return True
      # Check collision bottom
-     if ball.y > height-ball.radius:
+     if ball.y > height - ball.radius:
           return True
      return False
 
 def check_point(ball, width):
      # Check right 
-     if ball.x > width-ball.radius:
-          return 1
-     # Check left
-     if ball.x <0+ball.radius:
+     if ball.x > width - ball.radius:
           return 2
+     # Check left
+     if ball.x <0 + ball.radius:
+          return 1
      return 0
 
 
