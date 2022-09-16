@@ -25,9 +25,9 @@ def main():
 
      # game loop
      while not quit:
-          
+
           # Set FPS to 60
-          clock.tick(60)
+          clock.tick(FPS)
 
           # Update screen each frame
           pygame.display.update()
