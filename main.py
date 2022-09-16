@@ -17,12 +17,12 @@ ball = Ball(400, 250, 10)
 left_thing = Thing(0, 190)
 right_thing = Thing(780, 190)
 
-
-
 def main():
      quit = False
+
      score_1 = 0
      score_2 = 0
+     
      clock = pygame.time.Clock()
 
      left_rect = pygame.Rect(left_thing.x, left_thing.y, left_thing.width, left_thing.height)
@@ -61,15 +61,6 @@ def main():
      
           ball.x += ball.vel_x
           ball.y += ball.vel_y
-          #if ball.x > width-ball.radius:
-               #ball.vel_x *= -1
-          #if ball.x <0+ball.radius:
-               #ball.vel_x *= -1
-
-          #if ball.y > height-ball.radius:
-               #ball.vel_y *=-1
-          #if ball.y <0+ball.radius:
-               #ball.vel_y *=-1
           
           if check_collision_x(ball, left_rect, right_rect, width):
                ball.vel_x *=-1
@@ -79,7 +70,6 @@ def main():
           
           if check_point(ball, width) == 1:
                #player1
-               
                ball.x = 400
                ball.y= 250
                score_1 +=1
@@ -96,24 +86,28 @@ def main():
      return
 
 def check_collision_x(ball, left, right, width):
-     #check collision left side
+     # Check collision left
      if ball.x < left.width and ball.y > left.y and ball.y < left.y+left.height:
           return True
+     # Check collision right
      if ball.x > width-right.width and ball.y > right.y and ball.y < right.y+right.height:
           return True
      return False
 
 def check_collision_y(ball, height):
-     #check collision left side
+     # Check collision top
      if ball.y < ball.radius:
           return True
+     # Check collision bottom
      if ball.y > height-ball.radius:
           return True
      return False
 
-def check_point(ball, width):    
+def check_point(ball, width):
+     # Check right 
      if ball.x > width-ball.radius:
           return 1
+     # Check left
      if ball.x <0+ball.radius:
           return 2
      return 0
