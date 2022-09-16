@@ -111,9 +111,12 @@ def main():
                else:
                     winner=2
           
-               text3 = font1.render(f"Player {winner} heeft gewonnen" , True, WHITE)
+               text3 = font1.render(f"Player {winner} heeft gewonnen", True, WHITE)
                textRect3 = text3.get_rect()
                textRect3.center = (width/2, height/2)
+               text4 = font1.render(f"Click to restart", True, WHITE)
+               textRect4 = text4.get_rect()
+               textRect4.center = (width/2, textRect3.y+100)
                ball.x = -ball.radius
                restart = False
 
@@ -127,6 +130,7 @@ def main():
                               restart = True
 
                     screen.blit(text3, textRect3)
+                    screen.blit(text4, textRect4)
 
                ball.x = 400
                ball.y = 250
