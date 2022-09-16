@@ -1,4 +1,4 @@
-import pygame, sys
+import pygame, sys, random
 from ball import *
 from thingie import *
 
@@ -72,14 +72,14 @@ def main():
           pygame.draw.rect(screen, WHITE, left_rect)
           pygame.draw.rect(screen, WHITE, right_rect)
 
-          screen.blit(text1, textRect1)
-          screen.blit(text2, textRect2)
+
      
           ball.x += ball.vel_x
           ball.y += ball.vel_y
           
           if check_collision_x(ball, left_rect, right_rect, width):
-               ball.vel_x *=-1
+               ball.vel_x *=-1-random.random()/5
+               ball.vel_y *= 1+random.random()/5
           
           if check_collision_y(ball, height):
                ball.vel_y *=-1
@@ -90,6 +90,8 @@ def main():
                ball.y= 250
                score_1 += 1
                text2 = font1.render(str(score_1), True, WHITE)
+               ball.vel_x = 4
+               ball.vel_y = 1
 
           if check_point(ball, width) == 2:
                #player2
@@ -97,10 +99,26 @@ def main():
                ball.y= 250
                score_2 += 1
                text1 = font1.render(str(score_2), True, WHITE)
+               ball.vel_x = 4
+               ball.vel_y = 1
+
+          screen.blit(text1, textRect1)
+          screen.blit(text2, textRect2)
 
           if score_1 == score_to_win or score_2 == score_to_win:
+               if score_1 == score_to_win:
+                    winner = 1
+               else:
+                    winner=2
+          
+               text3 = font1.render(f"Player {winner} heeft gewonnen" , True, WHITE)
+               textRect3 = text3.get_rect()
+               textRect3.center = (width/2, height/2)
+               ball.x = -ball.radius
                restart = False
+
                while not restart:
+                    pygame.display.flip()
                     for event in pygame.event.get():
                          if event.type == pygame.QUIT:
                               pygame.quit()
@@ -108,11 +126,14 @@ def main():
                          if event.type == pygame.MOUSEBUTTONDOWN:
                               restart = True
 
-                    ball.x = -ball.radius
+                    screen.blit(text3, textRect3)
+
                ball.x = 400
                ball.y = 250
                score_1 = 0
                score_2 = 0
+               text1 = font1.render(str(score_2), True, WHITE)
+               text2 = font1.render(str(score_1), True, WHITE)
 
      return
 
