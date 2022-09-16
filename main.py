@@ -18,11 +18,16 @@ right_thing = Thing(780, 190)
 def main():
      quit = False
 
+     clock = pygame.time.Clock()
+
      left_rect = pygame.Rect(left_thing.x, left_thing.y, left_thing.width, left_thing.height)
      right_rect = pygame.Rect(right_thing.x, right_thing.y, right_thing.width, right_thing.height)
 
      # game loop
      while not quit:
+          
+          # Set FPS to 60
+          clock.tick(60)
 
           # Update screen each frame
           pygame.display.update()
