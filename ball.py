@@ -5,5 +5,5 @@ class Ball():
           self.y = 250
           self.radius = radius
 
-          self.vel_x = 4
-          self.vel_y = 1
+          self.vel_x = 10
+          self.vel_y = 0

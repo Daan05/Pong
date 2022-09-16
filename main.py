@@ -25,6 +25,8 @@ def main():
      score_1 = 0
      score_2 = 0
 
+     score_to_win = 5
+
      # Text stuff
      text1 = font1.render(str(0), True, WHITE)
      textRect1 = text1.get_rect()
@@ -96,6 +98,21 @@ def main():
                score_2 += 1
                text1 = font1.render(str(score_2), True, WHITE)
 
+          if score_1 == score_to_win or score_2 == score_to_win:
+               restart = False
+               while not restart:
+                    for event in pygame.event.get():
+                         if event.type == pygame.QUIT:
+                              pygame.quit()
+                              sys.exit()
+                         if event.type == pygame.MOUSEBUTTONDOWN:
+                              restart = True
+
+                    ball.x = -ball.radius
+               ball.x = 400
+               ball.y = 250
+               score_1 = 0
+               score_2 = 0
 
      return
 
