@@ -17,9 +17,12 @@ ball = Ball(400, 250, 10)
 left_thing = Thing(0, 190)
 right_thing = Thing(780, 190)
 
+
+
 def main():
      quit = False
-
+     score_1 = 0
+     score_2 = 0
      clock = pygame.time.Clock()
 
      left_rect = pygame.Rect(left_thing.x, left_thing.y, left_thing.width, left_thing.height)
@@ -41,13 +44,13 @@ def main():
                     sys.exit()
 
           key_input = pygame.key.get_pressed()
-          if key_input[pygame.K_UP]:
+          if key_input[pygame.K_UP] and right_rect.y >0:
                right_rect.y -= 5
-          if key_input[pygame.K_DOWN]:
+          if key_input[pygame.K_DOWN] and right_rect.y<height-right_rect.height:
                right_rect.y += 5
-          if key_input[pygame.K_w]:
+          if key_input[pygame.K_w] and left_rect.y >0:
                left_rect.y -= 5
-          if key_input[pygame.K_s]:
+          if key_input[pygame.K_s] and left_rect.y<height-left_rect.height:
                left_rect.y += 5
 
           # Clear screen, then draw stuff
@@ -76,13 +79,18 @@ def main():
           
           if check_point(ball, width) == 1:
                #player1
-               print("point  1")
+               
+               ball.x = 400
+               ball.y= 250
+               score_1 +=1
+               print(score_1)
 
           if check_point(ball, width) == 2:
                #player2
-               print("point  2")
-          
-
+               ball.x = 400
+               ball.y= 250
+               score_2 +=1
+               print(score_2)
 
 
      return
