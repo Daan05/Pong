@@ -38,15 +38,15 @@ def main():
                     pygame.quit()
                     sys.exit()
 
-               if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
-                         right_rect.y -= 5
-                    if event.key == pygame.K_DOWN:
-                         right_rect.y += 5
-                    if event.key == pygame.K_w:
-                         left_rect.y -= 5
-                    if event.key == pygame.K_s:
-                         left_rect.y += 5
+          key_input = pygame.key.get_pressed()
+          if key_input[pygame.K_UP]:
+               right_rect.y -= 5
+          if key_input[pygame.K_DOWN]:
+               right_rect.y += 5
+          if key_input[pygame.K_w]:
+               left_rect.y -= 5
+          if key_input[pygame.K_s]:
+               left_rect.y += 5
 
           # Clear screen, then draw stuff
           screen.fill(BLACK)
