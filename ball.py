@@ -6,4 +6,4 @@ class Ball():
           self.radius = radius
 
           self.vel_x = 4
-          self.vel_y = 0
+          self.vel_y = 1

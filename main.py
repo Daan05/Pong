@@ -9,7 +9,9 @@ FPS = 60
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 
-screen = pygame.display.set_mode((800, 500))
+width = 800
+height = 500
+screen = pygame.display.set_mode((width, height))
 
 ball = Ball(400, 250, 10)
 left_thing = Thing(0, 190)
@@ -53,8 +55,61 @@ def main():
           pygame.draw.circle(screen, WHITE, (ball.x, ball.y), ball.radius)
           pygame.draw.rect(screen, WHITE, left_rect)
           pygame.draw.rect(screen, WHITE, right_rect)
+     
+          ball.x += ball.vel_x
+          ball.y += ball.vel_y
+          #if ball.x > width-ball.radius:
+               #ball.vel_x *= -1
+          #if ball.x <0+ball.radius:
+               #ball.vel_x *= -1
+
+          #if ball.y > height-ball.radius:
+               #ball.vel_y *=-1
+          #if ball.y <0+ball.radius:
+               #ball.vel_y *=-1
+          
+          if check_collision_x(ball, left_rect, right_rect, width):
+               ball.vel_x *=-1
+          
+          if check_collision_y(ball, height):
+               ball.vel_y *=-1
+          
+          if check_point(ball, width) == 1:
+               #player1
+               print("point  1")
+
+          if check_point(ball, width) == 2:
+               #player2
+               print("point  2")
+          
+
+
 
      return
+
+def check_collision_x(ball, left, right, width):
+     #check collision left side
+     if ball.x < left.width and ball.y > left.y and ball.y < left.y+left.height:
+          return True
+     if ball.x > width-right.width and ball.y > right.y and ball.y < right.y+right.height:
+          return True
+     return False
+
+def check_collision_y(ball, height):
+     #check collision left side
+     if ball.y < ball.radius:
+          return True
+     if ball.y > height-ball.radius:
+          return True
+     return False
+
+def check_point(ball, width):    
+     if ball.x > width-ball.radius:
+          return 1
+     if ball.x <0+ball.radius:
+          return 2
+     return 0
+
 
 if __name__ == "__main__":
      main()
